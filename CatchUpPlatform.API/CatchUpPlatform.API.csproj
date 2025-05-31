@@ -30,7 +30,7 @@
 
     <ItemGroup>
       <Folder Include="News\" />
-      <Folder Include="Shared\Infrastructure\Persistence\EFC\" />
+      <Folder Include="Shared\Infrastructure\Persistence\EFC\Repositories\" />
     </ItemGroup>
 
 </Project>
