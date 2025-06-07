@@ -22,10 +22,10 @@
 
         <!-- Mysql Entity Framework Core related packages -->
         <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.4" />
         
         <!-- Swagger related packages -->
         <PackageReference Include="Swashbukle.AspNetCore" Version="2.0.0" />
-        <PackageReference Include="Swashbukle.AspNetCore.Newtonsoft" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>

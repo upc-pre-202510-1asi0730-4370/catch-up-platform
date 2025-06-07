@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
+
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString(@"DefaultConnection");
 
@@ -51,11 +54,8 @@ using (var scope = app.Services.CreateScope())
     context.Database.EnsureCreated();
 }
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.Run();
