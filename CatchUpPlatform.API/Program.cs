@@ -3,7 +3,9 @@ using CatchUpPlatform.API.News.Application.Internal.QueryServices;
 using CatchUpPlatform.API.News.Domain.Repositories;
 using CatchUpPlatform.API.News.Domain.Services;
 using CatchUpPlatform.API.News.Infrastructure.Repositories;
+using CatchUpPlatform.API.Shared.Domain.Repositories;
 using CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
+using CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using CatchUpPlatform.API.Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +45,9 @@ else if (builder.Environment.IsProduction())
                 .EnableDetailedErrors();
         }
     );
+
+// Shared Bounded Context Injection Configuration
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // News Bounded Context Injection Configuration
 builder.Services.AddScoped<IFavoriteSourceRepository, FavoriteSourceRepository>();
