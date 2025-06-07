@@ -1,4 +1,7 @@
+using CatchUpPlatform.API.News.Application.Internal.CommandServices;
+using CatchUpPlatform.API.News.Application.Internal.QueryServices;
 using CatchUpPlatform.API.News.Domain.Repositories;
+using CatchUpPlatform.API.News.Domain.Services;
 using CatchUpPlatform.API.News.Infrastructure.Repositories;
 using CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using CatchUpPlatform.API.Shared.Interfaces.ASP.Configuration;
@@ -43,6 +46,8 @@ else if (builder.Environment.IsProduction())
 
 // News Bounded Context Injection Configuration
 builder.Services.AddScoped<IFavoriteSourceRepository, FavoriteSourceRepository>();
+builder.Services.AddScoped<IFavoriteSourceQueryService, FavoriteSourceQueryService>();
+builder.Services.AddScoped<IFavoriteSourceCommandService, FavoriteSourceCommandService>();
 
 var app = builder.Build();
 
