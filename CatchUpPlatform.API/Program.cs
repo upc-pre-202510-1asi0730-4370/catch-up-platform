@@ -1,13 +1,14 @@
 using CatchUpPlatform.API.News.Domain.Repositories;
 using CatchUpPlatform.API.News.Infrastructure.Repositories;
 using CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
+using CatchUpPlatform.API.Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
 
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString(@"DefaultConnection");
