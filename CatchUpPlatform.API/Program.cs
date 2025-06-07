@@ -1,3 +1,5 @@
+using CatchUpPlatform.API.News.Domain.Repositories;
+using CatchUpPlatform.API.News.Infrastructure.Repositories;
 using CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,8 +36,10 @@ else if (builder.Environment.IsProduction())
                 .EnableDetailedErrors();
         }
     );
-    
-    
+
+// News Bounded Context Injection Configuration
+builder.Services.AddScoped<IFavoriteSourceRepository, FavoriteSourceRepository>();
+
 var app = builder.Build();
 
 // Verify Database Objects are created

@@ -1,28 +1,31 @@
-using CatchUpPlatform.API.News.Domain.Model.Aggregate;
+using CatchUpPlatform.API.News.Domain.Model.Aggregates;
 using CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CatchUpPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
-public class AppDbContext(DbContextOptions options) : DbContext
+/// <summary>
+///     Application database context
+/// </summary>
+public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        optionsBuilder.AddCreatedUpdatedInterceptor();
-        base.OnConfiguring(optionsBuilder);
+        // Add the created and updated interceptor
+        builder.AddCreatedUpdatedInterceptor();
+        base.OnConfiguring(builder);
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
 
-        // FavoriteSource Entity
-        modelBuilder.Entity<FavoriteSource>().HasKey(f => f.Id);
-        modelBuilder.Entity<FavoriteSource>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
-        modelBuilder.Entity<FavoriteSource>().Property(f => f.SourceId).IsRequired();
-        modelBuilder.Entity<FavoriteSource>().Property(f => f.NewsApiKey).IsRequired();
+        builder.Entity<FavoriteSource>().HasKey(f => f.Id);
+        builder.Entity<FavoriteSource>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<FavoriteSource>().Property(f => f.SourceId).IsRequired();
+        builder.Entity<FavoriteSource>().Property(f => f.NewsApiKey).IsRequired();
 
-        modelBuilder.UseSnakeCaseNamingConvention();
+        builder.UseSnakeCaseNamingConvention();
     }
 }
